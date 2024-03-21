@@ -1,29 +1,27 @@
-package com.launchautomator.events.views.stages;
+package com.launchautomator.events.views;
 
-import com.launchautomator.events.views.MainLayout;
+import akka.actor.ActorSystem;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
 
-@PageTitle("Stages")
-@Route(value = "stages", layout = MainLayout.class)
+import static akka.pattern.Patterns.ask;
+
+@PageTitle("Expo")
+@Route(value = "expo", layout = MainLayout.class)
 @RolesAllowed("USER")
-public class StagesView extends HorizontalLayout {
+public class ExpoView extends HorizontalLayout {
 
     private TextField name;
     private Button sayHello;
 
-    public StagesView() {
-        name = new TextField("Your name");
-        sayHello = new Button("Say hello");
-        sayHello.addClickListener(e -> {
-            Notification.show("Hello " + name.getValue());
-        });
+    ActorSystem system;
+
+    public ExpoView(ActorSystem system) {
         sayHello.addClickShortcut(Key.ENTER);
 
         setMargin(true);

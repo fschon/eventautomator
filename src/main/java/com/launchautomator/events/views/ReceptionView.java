@@ -1,4 +1,4 @@
-package com.launchautomator.events.views.reception;
+package com.launchautomator.events.views;
 
 import com.launchautomator.events.views.MainLayout;
 import com.vaadin.flow.component.Key;

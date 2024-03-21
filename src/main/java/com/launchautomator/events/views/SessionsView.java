@@ -1,4 +1,4 @@
-package com.launchautomator.events.views.networking;
+package com.launchautomator.events.views;
 
 import com.launchautomator.events.views.MainLayout;
 import com.vaadin.flow.component.Key;
@@ -10,15 +10,15 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
 
-@PageTitle("Networking")
-@Route(value = "networking", layout = MainLayout.class)
+@PageTitle("Sessions")
+@Route(value = "sessions", layout = MainLayout.class)
 @RolesAllowed("USER")
-public class NetworkingView extends HorizontalLayout {
+public class SessionsView extends HorizontalLayout {
 
     private TextField name;
     private Button sayHello;
 
-    public NetworkingView() {
+    public SessionsView() {
         name = new TextField("Your name");
         sayHello = new Button("Say hello");
         sayHello.addClickListener(e -> {

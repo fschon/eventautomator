@@ -1,28 +1,26 @@
 package com.launchautomator.events.security;
 
+import com.launchautomator.events.data.DataService;
 import com.launchautomator.events.data.User;
-import com.launchautomator.events.data.UserRepository;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class AuthenticatedUser {
 
-    private final UserRepository userRepository;
+    private final DataService dataService;
     private final AuthenticationContext authenticationContext;
 
-    public AuthenticatedUser(AuthenticationContext authenticationContext, UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public AuthenticatedUser(AuthenticationContext authenticationContext, DataService dataService) {
+        this.dataService = dataService;
         this.authenticationContext = authenticationContext;
     }
 
-    @Transactional
     public Optional<User> get() {
         return authenticationContext.getAuthenticatedUser(UserDetails.class)
-                .map(userDetails -> userRepository.findByUsername(userDetails.getUsername()));
+                .map(userDetails -> dataService.findByUsername(userDetails.getUsername()).get());
     }
 
     public void logout() {

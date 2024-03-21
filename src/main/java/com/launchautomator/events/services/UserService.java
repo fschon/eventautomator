@@ -1,44 +1,36 @@
 package com.launchautomator.events.services;
 
+import com.launchautomator.events.data.DataService;
 import com.launchautomator.events.data.User;
-import com.launchautomator.events.data.UserRepository;
+
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    private final UserRepository repository;
+    private final DataService dataService;
 
-    public UserService(UserRepository repository) {
-        this.repository = repository;
+    public UserService(DataService dataService) {
+        this.dataService = dataService;
     }
 
     public Optional<User> get(Long id) {
-        return repository.findById(id);
+        return Optional.ofNullable(dataService.dataRoot().userIdMap.get(id));
     }
 
     public User update(User entity) {
-        return repository.save(entity);
+        return dataService.save(entity);
     }
 
-    public void delete(Long id) {
-        repository.deleteById(id);
-    }
-
-    public Page<User> list(Pageable pageable) {
-        return repository.findAll(pageable);
-    }
-
-    public Page<User> list(Pageable pageable, Specification<User> filter) {
-        return repository.findAll(filter, pageable);
+    public Collection<User> list() {
+        return dataService.dataRoot().userIdMap.values();
     }
 
     public int count() {
-        return (int) repository.count();
+        return (int) dataService.dataRoot().userIdMap.size();
     }
 
 }

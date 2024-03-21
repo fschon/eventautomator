@@ -2,12 +2,6 @@ package com.launchautomator.events.views;
 
 import com.launchautomator.events.data.User;
 import com.launchautomator.events.security.AuthenticatedUser;
-import com.launchautomator.events.views.about.AboutView;
-import com.launchautomator.events.views.expo.ExpoView;
-import com.launchautomator.events.views.networking.NetworkingView;
-import com.launchautomator.events.views.reception.ReceptionView;
-import com.launchautomator.events.views.sessions.SessionsView;
-import com.launchautomator.events.views.stages.StagesView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;

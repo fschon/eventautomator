@@ -1,4 +1,4 @@
-package com.launchautomator.events.views.about;
+package com.launchautomator.events.views;
 
 import com.launchautomator.events.views.MainLayout;
 import com.vaadin.flow.component.html.H2;
