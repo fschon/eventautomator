@@ -47,9 +47,9 @@ class VideoConf extends LitElement {
       dynacast: true,
 
       // default capture settings
-      videoCaptureDefaults: {
-        resolution: VideoPresets.h720.resolution,
-      },
+      //videoCaptureDefaults: {
+      //  resolution: VideoPresets.h720.resolution,
+      //},
     });
 
     // pre-warm connection, this can be called as early as your page is loaded
