@@ -5,7 +5,7 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import com.launchautomator.events.views.components.ChatLayout;
+import com.launchautomator.events.components.chat.ChatLayout;
 import com.vaadin.flow.component.messages.MessageListItem;
 
 public class ChatUIActor extends AbstractBehavior<ChatCommand> {

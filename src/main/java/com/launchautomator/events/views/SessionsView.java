@@ -1,5 +1,6 @@
 package com.launchautomator.events.views;
 
+import com.launchautomator.events.components.videoconf.VideoConf;
 import com.launchautomator.events.views.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
@@ -15,21 +16,11 @@ import jakarta.annotation.security.RolesAllowed;
 @RolesAllowed("USER")
 public class SessionsView extends HorizontalLayout {
 
-    private TextField name;
-    private Button sayHello;
+    private VideoConf videoConf;
 
     public SessionsView() {
-        name = new TextField("Your name");
-        sayHello = new Button("Say hello");
-        sayHello.addClickListener(e -> {
-            Notification.show("Hello " + name.getValue());
-        });
-        sayHello.addClickShortcut(Key.ENTER);
-
-        setMargin(true);
-        setVerticalComponentAlignment(Alignment.END, name, sayHello);
-
-        add(name, sayHello);
+        videoConf = new VideoConf();
+        add(videoConf);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.launchautomator.events.views.components;
+package com.launchautomator.events.components.chat;
 
 
 import akka.actor.typed.ActorRef;
