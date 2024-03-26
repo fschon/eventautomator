@@ -19,14 +19,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RolesAllowed("USER")
 public class SessionsView extends HorizontalLayout {
 
-    @Autowired
-    AuthenticatedUser authenticatedUser;
+    //@Autowired
+    //AuthenticatedUser authenticatedUser;
 
     @Autowired
     Event event;
     private VideoConf videoConf;
 
-    public SessionsView() {
+    public SessionsView(AuthenticatedUser authenticatedUser) {
         videoConf = new VideoConf(authenticatedUser.get().get(), "sessionRoom");
         add(videoConf);
     }
