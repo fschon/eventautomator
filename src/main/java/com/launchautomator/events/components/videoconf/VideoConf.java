@@ -1,5 +1,6 @@
 package com.launchautomator.events.components.videoconf;
 
+import com.launchautomator.events.data.User;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
@@ -20,17 +21,17 @@ public class VideoConf extends LitTemplate {
     /**
      * See: https://www.npmjs.com/package/livekit-client
      */
-    public VideoConf() {
+    public VideoConf(User user, String roomName) {
         getElement().setProperty("url", "wss://event-automator-332245jc.livekit.cloud");
         //getElement().setProperty("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTEzNjAyODYsImlzcyI6IkFQSU1UNzV1R0NaeW1vMiIsIm5iZiI6MTcxMTM1MzA4Niwic3ViIjoicXVpY2tzdGFydCB1c2VyIDVpa3RyaCIsInZpZGVvIjp7ImNhblB1Ymxpc2giOnRydWUsImNhblB1Ymxpc2hEYXRhIjp0cnVlLCJjYW5TdWJzY3JpYmUiOnRydWUsInJvb20iOiJxdWlja3N0YXJ0IHJvb20iLCJyb29tSm9pbiI6dHJ1ZX19.WVAowjlhajmGm_M5iyVYtmOxfCp2-F1oReBCGILjJFI");
 
         AccessToken token = new AccessToken("APIMT75uGCZymo2", "dT5v2nZvemuaioTmC9kwcvFdxbB5UhRJUpaJjvS96ZC");
 
         // Fill in token information.
-        token.setName("name");
-        token.setIdentity("identity");
+        token.setName(user.getName());
+        token.setIdentity(user.getId().toString());
         token.setMetadata("metadata");
-        token.addGrants(new RoomJoin(true), new RoomName("myroom"));
+        token.addGrants(new RoomJoin(true), new RoomName(roomName));
 
         // Sign and create token string.
         getElement().setProperty("token", token.toJwt());

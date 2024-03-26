@@ -10,7 +10,7 @@ import {
   Track,
   VideoPresets,
   LocalTrackPublication,
-  LocalParticipant,
+  LocalParticipant, DisconnectReason,
 } from 'livekit-client';
 
 class VideoConf extends LitElement {
@@ -47,9 +47,9 @@ class VideoConf extends LitElement {
       dynacast: true,
 
       // default capture settings
-      //videoCaptureDefaults: {
-      //  resolution: VideoPresets.h720.resolution,
-      //},
+      videoCaptureDefaults: {
+        resolution: VideoPresets.h720.resolution,
+      },
     });
 
     // pre-warm connection, this can be called as early as your page is loaded
@@ -119,7 +119,7 @@ class VideoConf extends LitElement {
     console.log('handleActiveSpeakerChange');
   }
 
-  private handleDisconnect = () => {
+  private handleDisconnect = (reason?: DisconnectReason) => {
     console.log('handleDisconnect');
     const remoteElement = this?.shadowRoot?.getElementById('remote');
     while (remoteElement?.firstChild) {
