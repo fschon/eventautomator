@@ -29,8 +29,8 @@ class VideoConf extends LitElement {
     return html`
       <div id="content">
         <span>Video Conference</span>
-        <div id="local"></div
-        <div id="remote"></div
+        <div id="local"></div>
+        <div id="remote"></div>
       </div>
     `;
   }
