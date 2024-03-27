@@ -1,14 +1,10 @@
 package com.launchautomator.events.views;
 
-import com.launchautomator.events.components.videoconf.VideoConf;
+import com.launchautomator.events.components.videoconf.JavaRoom;
+import com.launchautomator.events.components.videoconf.VideoConfRoom;
 import com.launchautomator.events.data.Event;
 import com.launchautomator.events.security.AuthenticatedUser;
-import com.launchautomator.events.views.MainLayout;
-import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
@@ -24,11 +20,13 @@ public class SessionsView extends HorizontalLayout {
 
     @Autowired
     Event event;
-    private VideoConf videoConf;
+    private VideoConfRoom videoConf;
 
-    public SessionsView(AuthenticatedUser authenticatedUser) {
-        videoConf = new VideoConf(authenticatedUser.get().get(), "sessionRoom");
+    public SessionsView(AuthenticatedUser authenticatedUser, Event event) {
+        videoConf = new VideoConfRoom(authenticatedUser.get().get(), event, "sessionRoom");
         add(videoConf);
+        //var javaRoom = new JavaRoom();
+        //add(javaRoom);
     }
 
 }

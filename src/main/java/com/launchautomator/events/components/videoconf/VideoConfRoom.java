@@ -1,39 +1,66 @@
 package com.launchautomator.events.components.videoconf;
 
+import com.launchautomator.events.data.Event;
 import com.launchautomator.events.data.User;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.littemplate.LitTemplate;
+import com.vaadin.flow.component.notification.Notification;
 import io.livekit.server.AccessToken;
 import io.livekit.server.RoomJoin;
 import io.livekit.server.RoomName;
+import io.livekit.server.RoomServiceClient;
+import livekit.LivekitModels;
+import retrofit2.Call;
+import retrofit2.Response;
 
 import java.io.IOException;
 
-@Tag("video-conf")
-@JsModule("./src/video-conf.ts")
+@Tag("video-conf-room")
+@JsModule("./src/video-conf-room.ts")
 @NpmPackage(value = "livekit-client", version = "2.0.8")
 //@NpmPackage(value = "@lit/task", version = "1.0.0")
 //@NpmPackage(value = "lit/decorators", version = "0.3.0")
-public class VideoConf extends LitTemplate {
+public class VideoConfRoom extends LitTemplate {
+
+    LivekitModels.Room room;
 
     /**
      * See: https://www.npmjs.com/package/livekit-client
      */
-    public VideoConf(User user, String roomName) {
+    public VideoConfRoom(User user, Event event, String roomName) {
         getElement().setProperty("url", "wss://event-automator-332245jc.livekit.cloud");
-        //getElement().setProperty("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTEzNjAyODYsImlzcyI6IkFQSU1UNzV1R0NaeW1vMiIsIm5iZiI6MTcxMTM1MzA4Niwic3ViIjoicXVpY2tzdGFydCB1c2VyIDVpa3RyaCIsInZpZGVvIjp7ImNhblB1Ymxpc2giOnRydWUsImNhblB1Ymxpc2hEYXRhIjp0cnVlLCJjYW5TdWJzY3JpYmUiOnRydWUsInJvb20iOiJxdWlja3N0YXJ0IHJvb20iLCJyb29tSm9pbiI6dHJ1ZX19.WVAowjlhajmGm_M5iyVYtmOxfCp2-F1oReBCGILjJFI");
 
         AccessToken token = new AccessToken("APIMT75uGCZymo2", "dT5v2nZvemuaioTmC9kwcvFdxbB5UhRJUpaJjvS96ZC");
 
         // Fill in token information.
         token.setName(user.getName());
-        token.setIdentity(user.getId().toString());
+        token.setIdentity(event.getId() + "-" + user.getId().toString());
         token.setMetadata("metadata");
         token.addGrants(new RoomJoin(true), new RoomName(roomName));
 
         // Sign and create token string.
         getElement().setProperty("token", token.toJwt());
+
+
+        try {
+            RoomServiceClient client = RoomServiceClient.create(
+                    "http://event-automator-332245jc.livekit.cloud",
+                    "APIMT75uGCZymo2",
+                    "dT5v2nZvemuaioTmC9kwcvFdxbB5UhRJUpaJjvS96ZC");
+
+            Call<LivekitModels.Room> call = client.createRoom(roomName);
+            Response<LivekitModels.Room> response = call.execute(); // Use call.enqueue for async
+            room = response.body();
+
+        } catch (IOException e) {
+            Notification.show(e.getMessage(), 0, Notification.Position.MIDDLE);
+        }
+
+    }
+
+    public void disconnect() {
+
     }
 }

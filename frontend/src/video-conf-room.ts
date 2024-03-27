@@ -10,10 +10,10 @@ import {
   Track,
   VideoPresets,
   LocalTrackPublication,
-  LocalParticipant, DisconnectReason,
+  LocalParticipant, DisconnectReason, ScreenSharePresets,
 } from 'livekit-client';
 
-class VideoConf extends LitElement {
+class VideoConfRoom extends LitElement {
 
   constructor() {
     super();
@@ -46,9 +46,18 @@ class VideoConf extends LitElement {
       // optimize publishing bandwidth and CPU for published tracks
       dynacast: true,
 
-      // default capture settings
+      publishDefaults: {
+        simulcast: true,
+        videoSimulcastLayers: [VideoPresets.h90, VideoPresets.h216],
+        videoCodec: 'vp9',
+        dtx: true,
+        red: true,
+        forceStereo: false,
+        screenShareEncoding: ScreenSharePresets.h1080fps30.encoding,
+      },
       videoCaptureDefaults: {
-        resolution: VideoPresets.h720.resolution,
+        //resolution: VideoPresets.h720.resolution,
+        resolution: VideoPresets.h360.resolution,
       },
     });
 
@@ -134,4 +143,4 @@ class VideoConf extends LitElement {
 
 }
 
-customElements.define('video-conf', VideoConf);
+customElements.define('video-conf-room', VideoConfRoom);
