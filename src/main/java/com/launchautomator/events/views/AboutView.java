@@ -1,6 +1,7 @@
 package com.launchautomator.events.views;
 
 import com.launchautomator.events.views.MainLayout;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
@@ -31,6 +32,9 @@ public class AboutView extends VerticalLayout {
         setJustifyContentMode(JustifyContentMode.CENTER);
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         getStyle().set("text-align", "center");
+
+        Anchor navigateToHilla = new Anchor("counter", "Navigate to a Hilla view");
+        add(navigateToHilla);
     }
 
 }

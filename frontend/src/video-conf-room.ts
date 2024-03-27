@@ -59,6 +59,11 @@ class VideoConfRoom extends LitElement {
         //resolution: VideoPresets.h720.resolution,
         resolution: VideoPresets.h360.resolution,
       },
+      audioCaptureDefaults: {
+        autoGainControl: true,
+        echoCancellation: true,
+        noiseSuppression: true,
+      },
     });
 
     // pre-warm connection, this can be called as early as your page is loaded

@@ -27,7 +27,8 @@
       "@vaadin/flow-frontend": ["generated/jar-resources"],
       "@vaadin/flow-frontend/*": ["generated/jar-resources/*"],
       "Frontend/*": ["*"]
-    }
+    },
+    "strictPropertyInitialization": false
   },
   "include": [
     "frontend/**/*",
@@ -36,7 +37,4 @@
   "exclude": [
     "frontend/generated/jar-resources/**"
   ],
-  "compilerOptions": {
-    "strictPropertyInitialization": false,
-  }
 }
