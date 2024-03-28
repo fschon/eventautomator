@@ -19,7 +19,7 @@ import java.io.IOException;
 
 @Tag("video-conf-room")
 @JsModule("./src/video-conf-room.ts")
-@NpmPackage(value = "livekit-client", version = "2.0.8")
+@NpmPackage(value = "livekit-client", version = "2.0.10")
 //@NpmPackage(value = "@lit/task", version = "1.0.0")
 //@NpmPackage(value = "lit/decorators", version = "0.3.0")
 public class VideoConfRoom extends LitTemplate {
