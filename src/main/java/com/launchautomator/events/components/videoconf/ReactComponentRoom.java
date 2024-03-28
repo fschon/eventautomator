@@ -5,28 +5,27 @@ import com.launchautomator.events.data.User;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
-import com.vaadin.flow.component.littemplate.LitTemplate;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.react.ReactAdapterComponent;
 import io.livekit.server.AccessToken;
 import io.livekit.server.RoomJoin;
 import io.livekit.server.RoomName;
-import io.livekit.server.RoomServiceClient;
-import livekit.LivekitModels;
-import retrofit2.Call;
-import retrofit2.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
-//@Tag("react-room")
-//@JsModule("./src/react-room.ts")
-//@NpmPackage(value = "livekit-client", version = "2.0.10")
-public class ReactRoom extends ReactAdapterComponent {
+/***
+ * See: https://github.com/vaadin/flow/tree/main/flow-tests/test-react-adapter
+ */
+@Tag("react-component-room")
+@JsModule("./ReactComponentRoom.tsx")
+@NpmPackage(value = "livekit-client", version = "2.0.10")
+public class ReactComponentRoom extends ReactAdapterComponent {
+    Logger log = LoggerFactory.getLogger(this.getClass());
 
     String url;
     String token;
 
     public String getUrl() {
+        log.info("getUrl() {}", url);
         return getState("url", String.class);
     }
 
@@ -35,6 +34,7 @@ public class ReactRoom extends ReactAdapterComponent {
     }
 
     public String getToken() {
+        log.info("getToken() {}", token);
         return getState("token", String.class);
     }
 
@@ -42,7 +42,7 @@ public class ReactRoom extends ReactAdapterComponent {
         setState("token", token);
     }
 
-    public ReactRoom(User user, Event event, String roomName) {
+    public ReactComponentRoom(User user, Event event, String roomName) {
         setUrl("wss://event-automator-332245jc.livekit.cloud");
 
         AccessToken token = new AccessToken("APIMT75uGCZymo2", "dT5v2nZvemuaioTmC9kwcvFdxbB5UhRJUpaJjvS96ZC");
@@ -54,11 +54,7 @@ public class ReactRoom extends ReactAdapterComponent {
         token.addGrants(new RoomJoin(true), new RoomName(roomName));
 
         // Sign and create token string.
-        getElement().setProperty("token", token.toJwt());
-
-        setToken(token.toString());
-
-
+        setToken(token.toJwt().toString());
     }
 
     public void disconnect() {

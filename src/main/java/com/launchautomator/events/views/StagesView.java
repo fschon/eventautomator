@@ -1,8 +1,12 @@
 package com.launchautomator.events.views;
 
+import com.launchautomator.events.components.ReactInput;
 import com.launchautomator.events.views.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.NativeButton;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -19,17 +23,26 @@ public class StagesView extends HorizontalLayout {
     private Button sayHello;
 
     public StagesView() {
-        name = new TextField("Your name");
-        sayHello = new Button("Say hello");
-        sayHello.addClickListener(e -> {
-            Notification.show("Hello " + name.getValue());
-        });
-        sayHello.addClickShortcut(Key.ENTER);
+        var input = new ReactInput("initialValue");
 
-        setMargin(true);
-        setVerticalComponentAlignment(Alignment.END, name, sayHello);
+        var listenerOutput = new Span();
+        listenerOutput.setId("listenerOutput");
 
-        add(name, sayHello);
+        input.addValueChangeListener(listenerOutput::setText);
+
+        var setValueButton = new NativeButton("Set value",
+                (event) -> input.setValue("set value"));
+        setValueButton.setId("setValueButton");
+
+        var getOutput = new Span();
+        getOutput.setId("getOutput");
+
+        var getValueButton = new NativeButton("Get value",
+                (event) -> getOutput.setText(input.getValue()));
+        getValueButton.setId("getValueButton");
+
+        add(new Div(input, listenerOutput), new Div(setValueButton),
+                new Div(getValueButton, getOutput));
     }
 
 }

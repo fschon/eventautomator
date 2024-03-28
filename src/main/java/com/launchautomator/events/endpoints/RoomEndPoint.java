@@ -1,4 +1,4 @@
-package com.launchautomator.events.components.endpoints;
+package com.launchautomator.events.endpoints;
 
 
 import com.launchautomator.events.data.Event;
